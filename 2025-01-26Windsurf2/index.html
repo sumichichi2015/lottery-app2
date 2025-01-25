@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>くじ引きシミュレーター</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        button {
+            font-size: 24px;
+            padding: 15px 30px;
+            margin: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .result-table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        .result-table td {
+            border: 1px solid #ddd;
+            padding: 15px 30px;
+            text-align: center;
+        }
+        .result-table th {
+            background-color: #f2f2f2;
+            padding: 15px 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>くじ引きシミュレーター</h1>
+    <button onclick="drawLots()">くじを引く</button>
+    <table class="result-table" id="resultTable">
+        <tr>
+            <th>参加者</th>
+            <th>結果</th>
+        </tr>
+    </table>
+
+    <script>
+        function drawLots() {
+            const letters = ['A', 'B', 'C', 'D', 'E'];
+            const shuffled = letters.sort(() => Math.random() - 0.5);
+            const resultTable = document.getElementById('resultTable');
+            
+            // テーブルをクリア（ヘッダー行以外）
+            while (resultTable.rows.length > 1) {
+                resultTable.deleteRow(1);
+            }
+
+            // 結果を表示
+            for (let i = 0; i < 5; i++) {
+                const row = resultTable.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = `参加者${i + 1}`;
+                cell2.textContent = shuffled[i];
+            }
+        }
+    </script>
+</body>
+</html>
